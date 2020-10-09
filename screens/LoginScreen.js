@@ -10,12 +10,7 @@ export default class LoginScreen extends Component{
       this.state={
           emailID:"",
           Password:"",
-          firstname:"",
-          lastname:"",
-          address:"",
-          contact:"",
-          confirmpassword:"",
-          isModalVisible:false
+         
 
       }
         
