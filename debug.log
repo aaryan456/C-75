@@ -1,0 +1,17 @@
+[1004/204444.358:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
+[1004/204444.575:ERROR:process_reader_win.cc(127)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1004/204444.575:ERROR:exception_snapshot_win.cc(100)] thread ID 10340 not found in process
+[1011/172510.998:ERROR:settings.cc(430)] Settings version is not 5
+[1011/173511.054:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\HOME\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\53d89a6b-6a0d-4b6c-b78b-88411ee705e7: The system cannot find the path specified. (0x3)
+[1011/173511.054:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

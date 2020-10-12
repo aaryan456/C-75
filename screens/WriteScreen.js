@@ -40,7 +40,7 @@ export default class WriteScreen extends React.Component{
             <KeyboardAvoidingView style = {styles.container} behavior="padding" enabled>
                 <Header
                     centerComponent={{
-                        text: 'Story hub jndfbxcnv',
+                        text: 'Storyxx hub jndfbxcnv',
                         style: { color: '#000000', fontSize: 30, fontWeight: "bold" },
                     }}
                 />

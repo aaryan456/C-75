@@ -3,19 +3,23 @@ import {View,Text,TextInput,StyleSheet,
   TouchableOpacity,Alert,KeyboardAvoidingView,ScrollView,Modal} from 'react-native'
 import firebase from 'firebase'
 import db from '../config'
-import ReadStoryScreen from './ReadScreen'
-export default class LoginScreen extends Component{
+export default class Login extends Component{
     constructor(){
         super()
       this.state={
           emailID:"",
           Password:"",
-         
+          firstname:"",
+          lastname:"",
+          address:"",
+          contact:"",
+          confirmpassword:"",
+          isModalVisible:false
 
       }
         
     }
-    Login = (emailID,Password)=>{   
+    Login = (emailID,Password)=>{
         firebase.auth().signInWithEmailAndPassword(emailID,Password)
         .then(()=>{
             this.props.navigation.navigate('TabNavigator')
@@ -30,19 +34,181 @@ export default class LoginScreen extends Component{
         })
 
     }
-    
+    signUp = (emailID,Password,confirmpassword)=>{
+        if(Password !== confirmpassword ){
+           return Alert.alert("password doesnt match");
+        }
+        else{
 
+       
+        firebase.auth().createUserWithEmailAndPassword(emailID,Password)
+        .then(()=>{
+          db.collection('users').add({
+            firstname:this.state.firstname,
+            lastname:this.state.lastname,
+            contact:this.state.contact,
+            emailID:this.state.emailID,
+            address:this.state.address,
+
+
+          })
+            return Alert.alert("User added sucessfully",""
+            [{text:'ok',onPress:()=>{this.setState({'isModalVisible':false})}}]
+            )
+        })
+        .catch((error)=>{
+            var errorcode = error.code;
+            var msg = error.message;
+            return Alert.alert(msg)           
+            
+
+        })
+        }
+      }
+showmodal= ()=>{
+    return(
+      <Modal animationType="fade" transparent={true} visible={this.state.isModalVisible} >
+ <View style = {styles.modalContainer}>
+            <ScrollView style = {{width:'100%'}} >
+                <KeyboardAvoidingView style = {styles.KeyboardAvoidingView}>
+                    <Text style = {styles.modalTitle}>
+                    Registration Form
+                    </Text>
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"first name"}
+                  maxLength = {9}
+                  onChangeText = {(text)=>{this.setState({firstname:text})}}
+                  />
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"last name"}
+                  maxLength = {9}
+                  onChangeText = {(text)=>{this.setState({lastname:text})}}
+                  />
+                 <TextInput style = {styles.formTextInput}
+                  placeholder = {"contact"}
+                  maxLength = {10}
+                  keyboardType = {"numeric"}
+                  onChangeText = {(text)=>{this.setState({contact:text})}}
+                  />
+             <TextInput style = {styles.formTextInput}
+                  placeholder = {"address"}
+                multiline = {true}
+                  onChangeText = {(text)=>{this.setState({address:text})}}
+                  />
+
+             <TextInput style = {styles.formTextInput}
+                  placeholder = {"email"}
+                keyboardType = {"email-address"}
+                  onChangeText = {(text)=>{this.setState({emailID:text})}}
+                  />
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"password"}
+                 secureTextEntry = {true}
+                  onChangeText = {(text)=>{this.setState({Password:text})}}
+                  />
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"confirmpassword"}
+                 secureTextEntry = {true}
+                  onChangeText = {(text)=>{this.setState({confirmpassword:text})}}
+                  />
+                  <View style = {styles.modalBackButton}>
+                    <TouchableOpacity style = {styles.registerButton}
+                    onPress = {()=>{this.signUp(this.state.emailID,this.state.Password,this.state.confirmpassword)}}
+                    >
+                      <Text style = {styles.registerButtonText}>Register</Text>
+
+                    </TouchableOpacity>
+                    </View>
+                    <View style = {styles.modalBackButton}>
+                    <TouchableOpacity style = {styles.cancelButton}
+                    onPress = {()=>this.setState({"isModalVisible":false})}
+                    >
+                      <Text style = {styles.registerButtonText}>cancel</Text>
+
+                    </TouchableOpacity>
+                  
+
+                    </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </View>
+  </Modal>
+)
+}
  
 
     render(){
         return(
             <View style = {styles.container}>
               
-          {
-            this.showmodal()
-          }
+              <Modal animationType="fade" transparent={true} visible={this.state.isModalVisible} >
+ <View style = {styles.modalContainer}>
+            <ScrollView style = {{width:'100%'}} >
+                <KeyboardAvoidingView style = {styles.KeyboardAvoidingView}>
+                    <Text style = {styles.modalTitle}>
+                    Registration Form
+                    </Text>
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"first name"}
+                  maxLength = {9}
+                  onChangeText = {(text)=>{this.setState({firstname:text})}}
+                  />
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"last name"}
+                  maxLength = {9}
+                  onChangeText = {(text)=>{this.setState({lastname:text})}}
+                  />
+                 <TextInput style = {styles.formTextInput}
+                  placeholder = {"contact"}
+                  maxLength = {10}
+                  keyboardType = {"numeric"}
+                  onChangeText = {(text)=>{this.setState({contact:text})}}
+                  />
+             <TextInput style = {styles.formTextInput}
+                  placeholder = {"address"}
+                multiline = {true}
+                  onChangeText = {(text)=>{this.setState({address:text})}}
+                  />
+
+             <TextInput style = {styles.formTextInput}
+                  placeholder = {"email"}
+                keyboardType = {"email-address"}
+                  onChangeText = {(text)=>{this.setState({emailID:text})}}
+                  />
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"password"}
+                 secureTextEntry = {true}
+                  onChangeText = {(text)=>{this.setState({Password:text})}}
+                  />
+                  <TextInput style = {styles.formTextInput}
+                  placeholder = {"confirmpassword"}
+                 secureTextEntry = {true}
+                  onChangeText = {(text)=>{this.setState({confirmpassword:text})}}
+                  />
+                  <View style = {styles.modalBackButton}>
+                    <TouchableOpacity style = {styles.registerButton}
+                    onPress = {()=>{this.signUp(this.state.emailID,this.state.Password,this.state.confirmpassword)}}
+                    >
+                      <Text style = {styles.registerButtonText}>Register</Text>
+
+                    </TouchableOpacity>
+                    </View>
+                    <View style = {styles.modalBackButton}>
+                    <TouchableOpacity style = {styles.cancelButton}
+                    onPress = {()=>this.setState({"isModalVisible":false})}
+                    >
+                      <Text style = {styles.registerButtonText}>cancel</Text>
+
+                    </TouchableOpacity>
+                  
+
+                    </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </View>
+  </Modal>
             <View style={{justifyContent:'center', alignItems:'center'}}>
-            <Text>Book Santa App</Text>
+           
             </View>
             <View>
                 <TextInput styles = {styles.inputbox}
